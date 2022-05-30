@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:githubcommit/app/modules/home/controllers/home_controller.dart';
 
+import '../models/commit.dart';
 import '../widgets/commits.dart';
 
 class CommitsView extends GetView<HomeController> {
@@ -62,7 +63,7 @@ class CommitsView extends GetView<HomeController> {
                     : ListView.builder(
                         shrinkWrap: true,
                         physics: const PageScrollPhysics(),
-                        itemCount: 10, // controller.commits.value.length,
+                        itemCount: controller.commits.value.length,
                         itemBuilder: (BuildContext context, int index) {
                           return CommitWidget(
                               controller.commits.value[index], controller);

@@ -22,6 +22,7 @@ class HomeController extends GetxController {
     var _commitResponse = Rx<List<CommitList>>([]);
     var response =
         await hitApiX.getResponse(AppStrings.commitUrl + "?page=$page");
+    log(response.body);
     final commitList = commitListFromJson(response.body);
 
     for (var i = 0; i < commitList.length; i++) {
@@ -36,6 +37,7 @@ class HomeController extends GetxController {
       page++;
       getCommits();
     } else {
+      commits.value.removeRange(10, commits.value.length);
       isLoading.value = false;
     }
   }
