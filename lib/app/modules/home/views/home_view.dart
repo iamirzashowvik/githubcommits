@@ -29,7 +29,7 @@ class HomeView extends GetView<HomeController> {
         showUnselectedLabels: true,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.commit),
+            icon: Image.asset('Icons/commits.png',color: Color(0xF00A84FF),),
             label: 'Commits',
           ),
           BottomNavigationBarItem(
