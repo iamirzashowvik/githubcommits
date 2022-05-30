@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:githubcommit/app/data/appstrings.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -63,7 +64,7 @@ class ProfileView extends GetView<HomeController> {
               child: Text(
                 'Bio: ${controller.user.value.bio ?? 'No Bio'}',
                 style: TextStyle(
-                    color: Colors.white,
+                    color: textColor,
                     fontWeight: FontWeight.w400,
                     fontSize: 17.0,
                     fontFamily: 'SourceSansPro'),

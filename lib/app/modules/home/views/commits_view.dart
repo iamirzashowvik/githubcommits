@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:githubcommit/app/modules/home/controllers/home_controller.dart';
 
-import '../models/commit.dart';
 import '../widgets/commits.dart';
 
 class CommitsView extends GetView<HomeController> {
@@ -58,12 +57,12 @@ class CommitsView extends GetView<HomeController> {
             ),
             SliverToBoxAdapter(
               child: Obx(
-                () => controller.commits.value.isEmpty
+                () => controller.isLoading.value
                     ? const Center(child: CircularProgressIndicator())
                     : ListView.builder(
                         shrinkWrap: true,
                         physics: const PageScrollPhysics(),
-                        itemCount: controller.commits.value.length,
+                        itemCount: 10, // controller.commits.value.length,
                         itemBuilder: (BuildContext context, int index) {
                           return CommitWidget(
                               controller.commits.value[index], controller);

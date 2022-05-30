@@ -15,11 +15,29 @@ class HomeController extends GetxController {
     getCommits();
   }
 
+  var isLoading = true.obs;
   var commits = Rx<List<CommitList>>([]);
+  int page = 0;
   getCommits() async {
-    var response = await hitApiX.getResponse(AppStrings.commitUrl);
+    var _commitResponse = Rx<List<CommitList>>([]);
+    var response =
+        await hitApiX.getResponse(AppStrings.commitUrl + "?page=$page");
     final commitList = commitListFromJson(response.body);
-    commits.value = commitList;
+
+    for (var i = 0; i < commitList.length; i++) {
+      if (!(commitList[i].author.login.toString().toLowerCase().contains('g') ||
+          commitList[i].author.login.toString().toLowerCase().contains('x'))) {
+        _commitResponse.value.add(commitList[i]);
+        //   log(i.toString());
+      }
+    }
+    commits.value = _commitResponse.value;
+    if (commits.value.length < 10) {
+      page++;
+      getCommits();
+    } else {
+      isLoading.value = false;
+    }
   }
 
   var user = User().obs;
